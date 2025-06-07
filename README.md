@@ -33,13 +33,5 @@ An AI-powered tool that compares two versions of regulatory documents and identi
 
 ---
 
-## 📁 Project Structure
 
-regulatory-change-analyzer/
-├── app.py # Main Streamlit app
-├── change_detector.py # Logic for diffing texts
-├── llm_analysis.py # LLM integration via Ollama API
-├── Text_v1.txt # Sample old document
-├── Text_v2.txt # Sample new document
-└── README.md # Project description
 
