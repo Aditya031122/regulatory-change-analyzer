@@ -15,10 +15,9 @@ def detect_changes(text1, text2):
             added.append(line[2:])
         elif line.startswith('- '):
             deleted.append(line[2:])
-        elif line.startswith('? '):  # Skip markers
+        elif line.startswith('? '):  
             continue
 
-    # Simple modified logic – if a line was deleted and a similar line added
     for d in deleted:
         for a in added:
             if d[:30] in a or a[:30] in d:

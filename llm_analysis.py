@@ -1,6 +1,7 @@
 import requests
 import json
 
+
 def analyze_with_llm(change_text):
     prompt = f"""
 You are an expert in regulatory compliance.
@@ -18,17 +19,17 @@ Only return the JSON object.
         response = requests.post("http://localhost:11434/api/generate", json={
             "model": "gemma:2b",
             "prompt": prompt,
-            "stream": True
-        }, stream=True)
+            "stream": False  
+        })
 
-        full_response = ""
-        for line in response.iter_lines():
-            if line:
-                data_str = line.decode("utf-8").removeprefix("data: ")
-                data = json.loads(data_str)
-                full_response += data.get("response", "")
-
-        return full_response.strip()
+        if response.status_code == 200:
+            result = response.json()
+            return result.get("response", "").strip()
+        else:
+            return json.dumps({
+                "error": f"Request failed with status {response.status_code}",
+                "details": response.text
+            })
 
     except Exception as e:
         return json.dumps({
